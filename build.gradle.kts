@@ -5,8 +5,8 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 
 val fritz2Version = "1.0-SNAPSHOT"
@@ -24,6 +24,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("dev.fritz2:core:$fritz2Version")
+                // implementation("dev.fritz2:headless:$fritz2Version") // optional
             }
         }
         val jvmMain by getting {
