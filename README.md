@@ -3,6 +3,6 @@
 # fritz2-tailwind-template
 template project to quickly set up a fritz2-app using [tailwindcss.com](https://tailwindcss.com/) for styling
 
-Please have a look at [fritz2's documentation](https://docs.fritz2.dev).
+Please have a look at [fritz2's documentation](https://www.fritz2.dev/docs).
 If you have any problems with this template, 
 please open an issue at [fritz2](https://github.com/jwstegemann/fritz2/issues).
