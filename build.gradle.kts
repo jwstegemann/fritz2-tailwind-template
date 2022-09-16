@@ -1,7 +1,8 @@
 plugins {
-    kotlin("multiplatform") version "1.7.0"
+    kotlin("multiplatform") version "1.7.10"
+
     // KSP support
-    id("com.google.devtools.ksp") version "1.7.0-1.0.6"
+    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
 }
 
 repositories {
@@ -35,16 +36,16 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 // tailwind
-                implementation(npm("tailwindcss", "3.0.19"))
-                // implementation(npm("@tailwindcss/forms", "0.4.0")) // optional
+                implementation(npm("tailwindcss", "3.1.2"))
+                // implementation(npm("@tailwindcss/forms", "0.5.2")) // optional
 
                 // webpack
-                implementation(devNpm("postcss", "8.4.6"))
-                implementation(devNpm("postcss-loader", "6.2.1"))
-                implementation(devNpm("autoprefixer", "10.4.2"))
-                implementation(devNpm("css-loader", "6.6.0"))
+                implementation(devNpm("postcss", "8.4.14"))
+                implementation(devNpm("postcss-loader", "7.0.0"))
+                implementation(devNpm("autoprefixer", "10.4.7"))
+                implementation(devNpm("css-loader", "6.7.1"))
                 implementation(devNpm("style-loader", "3.3.1"))
-                implementation(devNpm("cssnano", "5.0.17"))
+                implementation(devNpm("cssnano", "5.1.11"))
             }
         }
     }
