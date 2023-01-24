@@ -8,7 +8,7 @@ import model.name
 fun main() {
 
     val frameworkStore = storeOf(Framework("fritz2"))
-    val nameStore = frameworkStore.sub(Framework.name())
+    val nameStore = frameworkStore.map(Framework.name())
 
     render {
         // card
