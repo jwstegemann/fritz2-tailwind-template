@@ -1,0 +1,24 @@
+[versions]
+kotlin = "1.9.22"
+fritz2 = "1.0-RC15"
+
+[libraries]
+fritz2-core = { module = "dev.fritz2:core", version.ref = "fritz2" }
+fritz2-headless = { module = "dev.fritz2:headless", version.ref = "fritz2" }
+fritz2-lenses = { group = "dev.fritz2", name = "lenses-annotation-processor", version.ref = "fritz2" }
+
+# Tailwind
+tailwindcss-core = { group = "npm", name = "tailwindcss", version = "3.3.5" }
+tailwindcss-forms = { group = "tailwindcss", name = "forms", version = "0.5.7" }
+tailwindcss-typography = { group = "tailwindcss", name = "typography", version = "0.5.10" }
+postcss-core = { group = "npm", name = "postcss", version = "8.4.31" }
+postcss-loader = { group = "npm", name = "postcss-loader", version = "7.3.3" }
+autoprefixer = { group = "npm", name = "autoprefixer", version = "10.4.16" }
+css-loader = { group = "npm", name = "css-loader", version = "6.8.1" }
+style-loader = { group = "npm", name = "style-loader", version = "3.3.3" }
+cssnano = { group = "npm", name = "cssnano", version = "6.0.1" }
+
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+google-ksp = { id = "com.google.devtools.ksp", version = "1.9.22-1.0.16" }

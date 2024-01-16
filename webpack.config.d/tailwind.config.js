@@ -27,27 +27,25 @@ const tailwind = {
 
 // webpack tailwind css settings
 ((config) => {
-    ((config) => {
-        let entry = config.output.path + '/../processedResources/js/main/' + mainCssFile;
-        config.entry.main.push(entry);
-        config.module.rules.push({
-            test: /\.css$/,
-            use: [
-                {loader: 'style-loader'},
-                {loader: 'css-loader'},
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        postcssOptions: {
-                            plugins: [
-                                require("tailwindcss")({config: tailwind}),
-                                require("autoprefixer"),
-                                require("cssnano")
-                            ]
-                        }
+    let entry = '/kotlin/' + mainCssFile;
+    config.entry.main.push(entry);
+    config.module.rules.push({
+        test: /\.css$/,
+        use: [
+            {loader: 'style-loader'},
+            {loader: 'css-loader'},
+            {
+                loader: 'postcss-loader',
+                options: {
+                    postcssOptions: {
+                        plugins: [
+                            require("tailwindcss")({config: tailwind}),
+                            require("autoprefixer"),
+                            require("cssnano")
+                        ]
                     }
                 }
-            ]
-        });
-    })(config);
+            }
+        ]
+    });
 })(config);

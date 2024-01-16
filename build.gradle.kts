@@ -1,16 +1,15 @@
-plugins {
-    kotlin("multiplatform") version "1.7.20"
-    // KSP support
-    id("com.google.devtools.ksp") version "1.7.20-1.0.6"
-}
+import com.google.devtools.ksp.gradle.KspTaskMetadata
+import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
+plugins {
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.google.ksp)
+}
 
 repositories {
     mavenCentral()
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") // new repository here
 }
-
-val fritz2Version = "1.0-RC13"
 
 //group = "my.fritz2.app"
 //version = "0.0.1-SNAPSHOT"
@@ -22,10 +21,10 @@ kotlin {
     }.binaries.executable()
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             dependencies {
-                implementation("dev.fritz2:core:$fritz2Version")
-                // implementation("dev.fritz2:headless:$fritz2Version") // optional
+                implementation(libs.fritz2.core)
+                // implementation(libs.fritz2.headless) // optional
             }
         }
         val jvmMain by getting {
@@ -35,32 +34,30 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 // tailwind
-                implementation(npm("tailwindcss", "3.2.1"))
-                // implementation(npm("@tailwindcss/forms", "0.5.3")) // optional
+                implementation(npm(libs.tailwindcss.core))
+                implementation(npm(libs.tailwindcss.typography))
+                //implementation(npm(libs.tailwindcss.forms)) // optional
 
                 // webpack
-                implementation(devNpm("postcss", "8.4.17"))
-                implementation(devNpm("postcss-loader", "7.0.1"))
-                implementation(devNpm("autoprefixer", "10.4.12"))
-                implementation(devNpm("css-loader", "6.7.1"))
-                implementation(devNpm("style-loader", "3.3.1"))
-                implementation(devNpm("cssnano", "5.1.13"))
+                implementation(npm(libs.postcss.core))
+                implementation(npm(libs.postcss.loader))
+                implementation(npm(libs.autoprefixer))
+                implementation(npm(libs.css.loader))
+                implementation(npm(libs.style.loader))
+                implementation(npm(libs.cssnano))
             }
         }
     }
 }
 
-/**
- * KSP support - start
- */
-dependencies {
-    add("kspCommonMainMetadata", "dev.fritz2:lenses-annotation-processor:$fritz2Version")
-}
-kotlin.sourceSets.commonMain { kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin") }
+// KSP support for Lens generation
+dependencies.kspCommonMainMetadata(libs.fritz2.lenses)
+kotlin.sourceSets.commonMain { tasks.withType<KspTaskMetadata> { kotlin.srcDir(destinationDirectory) } }
 
-tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().all {
-    if (name != "kspCommonMainKotlinMetadata") dependsOn("kspCommonMainKotlinMetadata")
-}
-/**
- * KSP support - end
- */
+// FIXME: Simple workaround to make version catalogs usable for npm dependencies too. Remove if kotlin plugin
+//  supports this out of the box!
+fun KotlinDependencyHandler.npm(dependency: Provider<MinimalExternalModuleDependency>): Dependency =
+    dependency.map { dep ->
+        val name = if (dep.group == "npm") dep.name else "@${dep.group}/${dep.name}"
+        npm(name, dep.version!!)
+    }.get()
