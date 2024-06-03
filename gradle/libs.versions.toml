@@ -1,6 +1,9 @@
 [versions]
 kotlin = "1.9.22"
 fritz2 = "1.0-RC18"
+tailwind = "3.4.3"
+tailwind-forms = "0.5.7"
+tailwind-typography = "0.5.13"
 
 [libraries]
 fritz2-core = { module = "dev.fritz2:core", version.ref = "fritz2" }
@@ -8,9 +11,9 @@ fritz2-headless = { module = "dev.fritz2:headless", version.ref = "fritz2" }
 fritz2-lenses = { group = "dev.fritz2", name = "lenses-annotation-processor", version.ref = "fritz2" }
 
 # Tailwind
-tailwindcss-core = { group = "npm", name = "tailwindcss", version = "3.3.5" }
-tailwindcss-forms = { group = "tailwindcss", name = "forms", version = "0.5.7" }
-tailwindcss-typography = { group = "tailwindcss", name = "typography", version = "0.5.10" }
+tailwindcss-core = { group = "npm", name = "tailwindcss", version.ref = "tailwind" }
+tailwindcss-forms = { group = "tailwindcss", name = "forms", version.ref = "tailwind-forms" }
+tailwindcss-typography = { group = "tailwindcss", name = "typography", version.ref = "tailwind-typography" }
 postcss-core = { group = "npm", name = "postcss", version = "8.4.31" }
 postcss-loader = { group = "npm", name = "postcss-loader", version = "7.3.3" }
 autoprefixer = { group = "npm", name = "autoprefixer", version = "10.4.16" }
