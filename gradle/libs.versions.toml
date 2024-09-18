@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.22"
-fritz2 = "1.0-RC18"
+fritz2 = "1.0-RC19"
 tailwind = "3.4.3"
 tailwind-forms = "0.5.7"
 tailwind-typography = "0.5.13"
